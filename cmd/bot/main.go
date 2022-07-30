@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/by-thoma/pocketer/pkg/server"
 	"log"
 
 	"github.com/boltdb/bolt"
@@ -31,10 +32,18 @@ func main() {
 	tokenRepositiry := boltdb.NewTokenRepository(db)
 
 	telegramBot := telegram.NewBot(bot, pocketClient, "https://localhost/", tokenRepositiry)
-	if err := telegramBot.Start(); err != nil {
+
+	authorizationServer := server.NewAuthorizationServer(pocketClient, tokenRepositiry, "https://t.me/pocket_golang_tamara_bot")
+
+	go func() {
+		if err := telegramBot.Start(); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	if err := authorizationServer.Start(); err != nil {
 		log.Fatal(err)
 	}
-
 }
 
 func initDB() (*bolt.DB, error) {
