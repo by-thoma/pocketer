@@ -1,0 +1,16 @@
+db_file: "bot.db"
+
+bot_url: "https://t.me/pocket_golang_tamara_bot"
+
+messages:
+  responses:
+    start: "Привет! Кинь доступ на Pocket. Для этого перейди по ссылке:\n%s"
+    already_authorized: "Ты уже авторизирован"
+    saved_successfully: "Ссылка сохранена"
+    unknown_command: "Я не знаю такой команды"
+  errors:
+    default: "Произошла неизвестная ошибка"
+    invalid_url: "Это невалидная ссылка"
+    unauthorized: "Ты не авторизирован"
+    unable_to_save: "Не удалость сохранить ссылку"
+
