@@ -1,6 +1,7 @@
 package telegram
 
 import (
+	"github.com/by-thoma/pocketer/pkg/config"
 	"log"
 
 	"github.com/by-thoma/pocketer/pkg/repository"
@@ -13,10 +14,12 @@ type Bot struct {
 	pocketClient    *pocket.Client
 	tokenRepository repository.TokenRepository
 	redirectURL     string
+
+	messages config.Messages
 }
 
-func NewBot(bot *tgbotapi.BotAPI, pocketClient *pocket.Client, redirectURL string, tr repository.TokenRepository) *Bot {
-	return &Bot{bot: bot, pocketClient: pocketClient, redirectURL: redirectURL, tokenRepository: tr}
+func NewBot(bot *tgbotapi.BotAPI, pocketClient *pocket.Client, redirectURL string, tr repository.TokenRepository, messages config.Messages) *Bot {
+	return &Bot{bot: bot, pocketClient: pocketClient, redirectURL: redirectURL, tokenRepository: tr, messages: messages}
 }
 
 func (b *Bot) Start() error {

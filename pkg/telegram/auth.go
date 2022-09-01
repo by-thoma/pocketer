@@ -15,7 +15,7 @@ func (b *Bot) initAuthorizationProcess(message *tgbotapi.Message) error {
 	}
 
 	msg := tgbotapi.NewMessage(message.Chat.ID,
-		fmt.Sprintf(replyStartTemplate, authLink))
+		fmt.Sprintf(b.messages.Responses.Start, authLink))
 
 	_, err = b.bot.Send(msg)
 	return err
@@ -28,7 +28,7 @@ func (b *Bot) getAccessToken(chatID int64) (string, error) {
 func (b *Bot) generateAuthorizationLink(chatID int64) (string, error) {
 	redirectURL := b.generateRedirectURL(chatID)
 
-	requestToken, err := b.pocketClient.GetRequestToken(context.Background(), redirectURL)
+	requestToken, err := b.pocketClient.GetRequestToken(context.Background(), b.redirectURL)
 	if err != nil {
 		return "", err
 	}

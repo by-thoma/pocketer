@@ -32,7 +32,7 @@ type Responses struct {
 }
 
 func Init() (*Config, error) {
-	viper.SetConfigName("configs")
+	viper.AddConfigPath("configs")
 	viper.SetConfigName("main")
 
 	if err := viper.ReadInConfig(); err != nil {
